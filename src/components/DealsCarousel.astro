@@ -1,0 +1,137 @@
+---
+import deals from "../data/deals.json";
+import Card from "./Card.astro";
+import Badge from "./Badge.astro";
+import Button from "./Button.astro";
+import site from "../data/site.json";
+import SectionHeader from "./SectionHeader.astro";
+import { Image } from "astro:assets";
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+    "/src/assets/images/**/*.{jpeg,jpg,png,gif,webp}",
+);
+---
+
+<section
+    class="py-20 bg-cream border-y-2 border-charcoal overflow-hidden relative"
+>
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-end mb-12">
+            <SectionHeader
+                title="Hot Deals"
+                subtitle="Limited Time"
+                class="mb-0"
+            />
+            <a
+                href="deals"
+                class="hidden md:inline-flex font-heading uppercase font-bold text-primary hover:text-charcoal transition-colors items-center gap-2"
+            >
+                View All Deals
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"
+                    ></path></svg
+                >
+            </a>
+        </div>
+
+        <div
+            class="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0"
+        >
+            {
+                deals.map((deal) => {
+                    const imagePath = `/src/assets/images/${deal.image}`;
+                    return (
+                        <div class="min-w-[300px] md:min-w-[400px] snap-center">
+                            <Card
+                                noPadding
+                                class="h-full flex flex-col relative transition-transform hover:-translate-y-1 duration-300"
+                            >
+                                <div class="bg-charcoal text-white text-center py-2 font-bold uppercase tracking-wider text-sm border-b-2 border-charcoal">
+                                    {deal.expires}
+                                </div>
+                                <div class="relative h-48 border-b-2 border-charcoal bg-gray-200">
+                                    {images[imagePath] ? (
+                                        <Image
+                                            src={images[imagePath]()}
+                                            alt={deal.title}
+                                            class="w-full h-full object-cover"
+                                            width={400}
+                                            height={300}
+                                        />
+                                    ) : (
+                                        <div class="w-full h-full bg-gray-200 flex items-center justify-center text-gray-400">
+                                            No Image
+                                        </div>
+                                    )}
+                                    {deal.badge && (
+                                        <div class="absolute top-2 left-2">
+                                            <Badge
+                                                text={deal.badge}
+                                                variant="accent"
+                                                rotate
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                                <div class="p-6 flex flex-col flex-grow text-center">
+                                    <h3 class="font-heading font-black text-2xl uppercase mb-2 leading-none">
+                                        {deal.title}
+                                    </h3>
+                                    <p class="text-charcoal/80 mb-6 flex-grow text-sm">
+                                        {deal.description}
+                                    </p>
+                                    <div class="flex justify-center items-center gap-4 mb-6">
+                                        <span class="text-gray-400 line-through font-bold text-lg decoration-2">
+                                            ${deal.originalPrice}
+                                        </span>
+                                        <span class="font-heading font-black text-4xl text-primary">
+                                            ${deal.price}
+                                        </span>
+                                    </div>
+                                    <Button
+                                        href={site.orderUrl}
+                                        variant="primary"
+                                        class="w-full"
+                                    >
+                                        Claim Deal
+                                    </Button>
+                                </div>
+                            </Card>
+                        </div>
+                    );
+                })
+            }
+        </div>
+
+        <div class="md:hidden text-center mt-4">
+            <a
+                href="deals"
+                class="inline-flex font-heading uppercase font-bold text-primary hover:text-charcoal transition-colors items-center gap-2"
+            >
+                View All Deals
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"
+                    ></path></svg
+                >
+            </a>
+        </div>
+    </div>
+</section>

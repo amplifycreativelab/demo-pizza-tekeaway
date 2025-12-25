@@ -1,0 +1,32 @@
+[
+    {
+        "id": "fam-feast",
+        "title": "Family Feast",
+        "description": "2 Large Pizzas + 2 Sides + 1.25L Drink",
+        "price": 55,
+        "originalPrice": 70,
+        "image": "deals/family.webp",
+        "expires": "Limited Time",
+        "badge": "Best Value"
+    },
+    {
+        "id": "date-night",
+        "title": "Date Night",
+        "description": "1 Large Pizza + 1 Side + 2 Desserts",
+        "price": 40,
+        "originalPrice": 52,
+        "image": "deals/date.webp",
+        "expires": "Ends Sunday",
+        "badge": "Hot"
+    },
+    {
+        "id": "lunch-special",
+        "title": "Lunch Special",
+        "description": "Any Small Pizza + Can of Drink",
+        "price": 15,
+        "originalPrice": 20,
+        "image": "deals/lunch.webp",
+        "expires": "11am - 3pm",
+        "badge": "Daily"
+    }
+]

@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+
+
+@theme {
+  --color-primary: #D92228;
+  --color-cream: #FFFBF2;
+  --color-accent: #F5A623;
+  --color-charcoal: #1A1A1A;
+
+  --font-body: 'Inter', sans-serif;
+  --font-heading: 'Archivo Black', sans-serif;
+}
+
+@layer base {
+
+  html,
+  body {
+    @apply bg-cream text-charcoal font-body antialiased overflow-x-hidden w-full max-w-[100vw];
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading uppercase font-bold;
+  }
+
+  /* Accessibility & Focus */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary;
+  }
+}

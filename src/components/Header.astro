@@ -1,0 +1,186 @@
+---
+import Button from "./Button.astro";
+import site from "../data/site.json";
+
+const base = import.meta.env.BASE_URL === "/" ? "/" : import.meta.env.BASE_URL;
+const getPath = (path: string) =>
+    path.startsWith("/") ? `${base}${path.substring(1)}` : `${base}${path}`;
+
+const links = [
+    { text: "Menu", href: "menu" },
+    { text: "Deals", href: "deals" },
+];
+---
+
+<header class="sticky top-0 z-50 w-full bg-cream border-b-2 border-charcoal">
+    <div
+        class="container mx-auto px-4 h-16 md:h-20 flex items-center justify-between"
+    >
+        <!-- Logo -->
+        <a
+            href={base}
+            class="flex items-center gap-2 text-charcoal hover:text-primary transition-colors group"
+        >
+            <div
+                class="w-10 h-10 bg-primary border-2 border-charcoal flex items-center justify-center text-white font-heading font-bold text-xl group-hover:rotate-3 transition-transform"
+            >
+                T
+            </div>
+            <span
+                class="text-xl md:text-2xl font-heading font-black tracking-tighter uppercase leading-none"
+            >
+                Takeaway<span class="text-primary block md:inline md:ml-1"
+                    >Express</span
+                >
+            </span>
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex items-center gap-8">
+            {
+                links.map((link) => (
+                    <a
+                        href={getPath(link.href)}
+                        class="font-heading uppercase font-bold text-sm tracking-wide hover:text-primary transition-colors"
+                    >
+                        {link.text}
+                    </a>
+                ))
+            }
+            <Button href={site.orderUrl} variant="primary" size="md">
+                Order Online
+            </Button>
+        </nav>
+
+        <!-- Mobile Menu Toggle -->
+        <button
+            id="menu-toggle"
+            class="md:hidden p-2 text-charcoal hover:text-primary z-50 relative"
+            aria-label="Toggle Menu"
+        >
+            <span class="sr-only">Open Menu</span>
+            <svg
+                id="menu-icon-open"
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><line x1="4" x2="20" y1="12" y2="12"></line><line
+                    x1="4"
+                    x2="20"
+                    y1="6"
+                    y2="6"></line><line x1="4" x2="20" y1="18" y2="18"
+                ></line></svg
+            >
+            <svg
+                id="menu-icon-close"
+                class="hidden"
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg
+            >
+        </button>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div
+        id="mobile-menu"
+        class="fixed inset-0 bg-cream z-40 transform translate-x-full transition-transform duration-300 ease-in-out md:hidden flex flex-col justify-center items-center gap-8 opacity-0 pointer-events-none invisible"
+    >
+        {
+            links.map((link) => (
+                <a
+                    href={getPath(link.href)}
+                    class="font-heading uppercase font-black text-4xl hover:text-primary transition-colors mobile-link"
+                >
+                    {link.text}
+                </a>
+            ))
+        }
+        <Button href={site.orderUrl} variant="primary" size="lg" class="mt-4">
+            Order Online
+        </Button>
+    </div>
+</header>
+
+<script>
+    const menuToggle = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const menuIconOpen = document.getElementById("menu-icon-open");
+    const menuIconClose = document.getElementById("menu-icon-close");
+    const header = document.querySelector("header");
+
+    // Function to close menu
+    const closeMenu = () => {
+        if (mobileMenu && menuIconOpen && menuIconClose) {
+            mobileMenu.classList.remove(
+                "translate-x-0",
+                "opacity-100",
+                "pointer-events-auto",
+            );
+            mobileMenu.classList.add(
+                "translate-x-full",
+                "opacity-0",
+                "pointer-events-none",
+            );
+
+            // Wait for transition to finish
+            setTimeout(() => {
+                if (mobileMenu.classList.contains("translate-x-full")) {
+                    mobileMenu.classList.add("invisible");
+                }
+            }, 300);
+
+            menuIconOpen.classList.remove("hidden");
+            menuIconClose.classList.add("hidden");
+            document.body.style.overflow = "";
+        }
+    };
+
+    if (menuToggle && mobileMenu && menuIconOpen && menuIconClose) {
+        menuToggle.addEventListener("click", () => {
+            const isOpen = mobileMenu.classList.contains("translate-x-0");
+
+            if (isOpen) {
+                closeMenu();
+            } else {
+                mobileMenu.classList.remove("invisible");
+
+                // Force reflow
+                void mobileMenu.offsetWidth;
+
+                mobileMenu.classList.remove(
+                    "translate-x-full",
+                    "opacity-0",
+                    "pointer-events-none",
+                );
+                mobileMenu.classList.add(
+                    "translate-x-0",
+                    "opacity-100",
+                    "pointer-events-auto",
+                );
+                menuIconOpen.classList.add("hidden");
+                menuIconClose.classList.remove("hidden");
+                document.body.style.overflow = "hidden"; // Prevent background scrolling
+            }
+        });
+
+        // Close menu when clicking a link
+        const mobileLinks = document.querySelectorAll(".mobile-link");
+        mobileLinks.forEach((link) => {
+            link.addEventListener("click", closeMenu);
+        });
+    }
+</script>

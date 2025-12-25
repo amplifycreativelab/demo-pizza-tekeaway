@@ -1,0 +1,24 @@
+---
+import MenuCard from "./MenuCard.astro";
+import menu from "../data/menu.json";
+import SectionHeader from "./SectionHeader.astro";
+
+// Flatten the menu items
+const allItems = menu.flatMap((category) => category.items);
+const bestSellers = allItems
+    .filter((item) => item.tags?.includes("Best Seller"))
+    .slice(0, 4);
+---
+
+<section class="py-24 container mx-auto px-4">
+    <SectionHeader
+        title="Crowd Favorites"
+        subtitle="Tried & Tested"
+        centered
+        class="mb-16"
+    />
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {bestSellers.map((item) => <MenuCard item={item} />)}
+    </div>
+</section>

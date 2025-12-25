@@ -1,0 +1,34 @@
+---
+interface Props {
+    text: string;
+    variant?: "accent" | "primary" | "black" | "green";
+    rotate?: boolean;
+    class?: string;
+}
+const {
+    text,
+    variant = "accent",
+    rotate = false,
+    class: className,
+} = Astro.props;
+
+const colors = {
+    accent: "bg-accent text-charcoal",
+    primary: "bg-primary text-white",
+    black: "bg-charcoal text-white",
+    green: "bg-green-600 text-white",
+};
+
+const rotation = rotate ? "-rotate-3" : "";
+---
+
+<span
+    class:list={[
+        "inline-block px-3 py-1 font-heading uppercase text-xs font-bold tracking-wider border border-charcoal shadow-[2px_2px_0px_0px_#1A1A1A]",
+        colors[variant],
+        rotation,
+        className,
+    ]}
+>
+    {text}
+</span>

@@ -1,0 +1,22 @@
+---
+import menu from "../data/menu.json";
+---
+
+<nav
+    class="sticky top-16 md:top-20 z-30 bg-white border-b-2 border-charcoal py-4 overflow-x-auto whitespace-nowrap scrollbar-hide shadow-md"
+>
+    <div
+        class="container mx-auto px-4 flex gap-2 md:gap-4 min-w-max md:justify-center"
+    >
+        {
+            menu.map((category) => (
+                <a
+                    href={`#${category.slug}`}
+                    class="font-heading uppercase font-bold text-sm md:text-base tracking-wider hover:text-primary transition-colors focus:text-primary px-4 py-2 border-2 border-transparent hover:border-charcoal hover:bg-cream active:bg-primary active:text-white rounded transition-all"
+                >
+                    {category.category}
+                </a>
+            ))
+        }
+    </div>
+</nav>

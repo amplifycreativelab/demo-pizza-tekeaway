@@ -1,0 +1,97 @@
+---
+import Card from "./Card.astro";
+import Badge from "./Badge.astro";
+import Button from "./Button.astro";
+import site from "../data/site.json";
+import { Image } from "astro:assets";
+
+interface Props {
+    item: {
+        id: string;
+        name: string;
+        description: string;
+        price: number;
+        tags?: string[];
+        image: string;
+    };
+}
+
+const { item } = Astro.props;
+const images = import.meta.glob<{ default: ImageMetadata }>(
+    "/src/assets/images/**/*.{jpeg,jpg,png,gif,webp}",
+);
+
+// Construct the full path to the image in src/assets
+// item.image is like "pizzas/pepperoni.webp" (relative to assets/images)
+// We need "/src/assets/images/pizzas/pepperoni.webp"
+const imagePath = `/src/assets/images/${item.image}`;
+
+if (!images[imagePath]) {
+    console.error(`Image not found: ${imagePath}`);
+}
+const loadAvatar = images[imagePath]
+    ? images[imagePath]()
+    : Promise.resolve({ default: "" }); // Fallback?
+---
+
+<Card
+    noPadding
+    class="h-full flex flex-col group hover:-translate-y-1 transition-transform duration-300"
+>
+    <div
+        class="relative h-56 overflow-hidden border-b-2 border-charcoal bg-gray-100"
+    >
+        {
+            images[imagePath] ? (
+                <Image
+                    src={images[imagePath]()}
+                    alt={item.name}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    width={400}
+                    height={300}
+                />
+            ) : (
+                <div class="w-full h-full bg-gray-200 flex items-center justify-center text-gray-400">
+                    No Image
+                </div>
+            )
+        }
+
+        <div class="absolute top-3 left-3 flex flex-wrap gap-2">
+            {
+                item.tags?.includes("Best Seller") && (
+                    <Badge text="Best Seller" variant="accent" />
+                )
+            }
+            {
+                item.tags?.includes("Spicy") && (
+                    <Badge text="Spicy" variant="primary" />
+                )
+            }
+            {
+                item.tags?.includes("Vegetarian") && (
+                    <Badge text="Veg" variant="green" />
+                )
+            }
+        </div>
+    </div>
+
+    <div class="p-6 flex flex-col flex-grow">
+        <div class="flex justify-between items-start mb-2 gap-4">
+            <h3 class="font-heading font-black text-xl uppercase leading-tight">
+                {item.name}
+            </h3>
+            <span class="font-heading font-bold text-xl text-primary shrink-0"
+                >${item.price}</span
+            >
+        </div>
+
+        <p class="text-charcoal/80 text-sm mb-6 flex-grow leading-relaxed">
+            {item.description}
+        </p>
+
+        <Button href={site.orderUrl} variant="primary" size="sm" class="w-full">
+            Add to Order
+        </Button>
+    </div>
+</Card>

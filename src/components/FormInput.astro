@@ -1,0 +1,32 @@
+---
+interface Props {
+    label: string;
+    name: string;
+    type?: "text" | "email" | "tel" | "number";
+    required?: boolean;
+    placeholder?: string;
+}
+const {
+    label,
+    name,
+    type = "text",
+    required = false,
+    placeholder,
+} = Astro.props;
+---
+
+<div class="flex flex-col gap-2">
+    <label
+        for={name}
+        class="font-heading font-bold uppercase text-sm tracking-wide"
+        >{label} {required && <span class="text-primary">*</span>}</label
+    >
+    <input
+        type={type}
+        id={name}
+        name={name}
+        required={required}
+        placeholder={placeholder}
+        class="border-2 border-charcoal p-3 font-sans focus:outline-none focus:ring-4 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-gray-400 bg-cream/20"
+    />
+</div>

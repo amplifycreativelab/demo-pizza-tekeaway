@@ -1,0 +1,81 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import MobileBottomBar from "../components/MobileBottomBar.astro";
+import Schema from "../components/Schema.astro";
+import site from "../data/site.json";
+
+interface Props {
+    title: string;
+    description?: string;
+    image?: string;
+}
+
+const {
+    title,
+    description = site.description,
+    image = "/images/og-default.jpg",
+} = Astro.props;
+const base = import.meta.env.BASE_URL === "/" ? "/" : import.meta.env.BASE_URL;
+
+// Ensure base ends with / for favicon if needed, but usually just needs to be prepended
+const favIconPath = `${base}favicon.svg`.replace("//", "/");
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" type="image/svg+xml" href={favIconPath} />
+        <meta name="generator" content={Astro.generator} />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <title>{title} | {site.name}</title>
+        <meta name="description" content={description} />
+        <link rel="canonical" href={canonicalURL} />
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={Astro.url} />
+        <meta property="og:title" content={`${title} | ${site.name}`} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={new URL(image, Astro.site)} />
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={Astro.url} />
+        <meta property="twitter:title" content={`${title} | ${site.name}`} />
+        <meta property="twitter:description" content={description} />
+        <meta property="twitter:image" content={new URL(image, Astro.site)} />
+
+        <Schema />
+    </head>
+    <body
+        class="flex flex-col min-h-screen bg-cream text-charcoal font-body antialiased selection:bg-primary selection:text-white"
+    >
+        <a
+            href="#main-content"
+            class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 bg-primary text-white p-4 font-bold border-2 border-charcoal"
+            >Skip to content</a
+        >
+
+        <Header />
+
+        <main id="main-content" class="flex-grow w-full">
+            <slot />
+        </main>
+
+        <Footer />
+        <MobileBottomBar />
+    </body>
+</html>

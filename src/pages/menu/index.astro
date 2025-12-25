@@ -1,0 +1,57 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import MenuCategoryNav from "../../components/MenuCategoryNav.astro";
+import MenuCard from "../../components/MenuCard.astro";
+import SectionHeader from "../../components/SectionHeader.astro";
+import menu from "../../data/menu.json";
+---
+
+<BaseLayout
+    title="Menu | Full Takeaway Menu"
+    description="View our full menu of wood-fired pizzas, sides, and desserts. Order online for delivery in Perth."
+>
+    <div
+        class="bg-primary text-white py-16 md:py-24 text-center border-b-2 border-charcoal relative overflow-hidden"
+    >
+        <div
+            class="absolute inset-0 bg-[url('/images/pattern.png')] opacity-10"
+        >
+        </div>
+        <h1
+            class="relative z-10 font-heading font-black text-5xl md:text-7xl uppercase tracking-tighter shadow-black drop-shadow-lg"
+        >
+            Our Menu
+        </h1>
+        <p
+            class="relative z-10 text-xl font-bold uppercase tracking-widest mt-4"
+        >
+            Fresh - Hot - Fast
+        </p>
+    </div>
+
+    <MenuCategoryNav />
+
+    <div class="container mx-auto px-4 py-20 bg-cream">
+        {
+            menu.map((category, index) => (
+                <section id={category.slug} class={`mb-24 scroll-mt-40`}>
+                    <div class="flex items-center gap-4 mb-12 border-b-4 border-charcoal pb-4">
+                        <h2 class="text-4xl md:text-6xl font-heading font-black uppercase text-charcoal leading-none">
+                            {category.category}
+                        </h2>
+                        <div class="flex-grow h-1 bg-charcoal/10 rounded-full" />
+                        <span class="font-bold text-charcoal/40 hidden md:block">
+                            {category.items.length} Items
+                        </span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-12">
+                        {category.items.map((item) => (
+                            <MenuCard item={item} />
+                        ))}
+                    </div>
+                </section>
+            ))
+        }
+    </div>
+</BaseLayout>

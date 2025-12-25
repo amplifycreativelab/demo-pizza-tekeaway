@@ -1,0 +1,59 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionHeader from "../../components/SectionHeader.astro";
+import FormInput from "../../components/FormInput.astro";
+import Textarea from "../../components/Textarea.astro";
+import Button from "../../components/Button.astro";
+import HoursAndLocation from "../../components/HoursAndLocation.astro";
+---
+
+<BaseLayout title="Contact Us | Takeaway Express">
+    <div class="py-20 md:py-24 container mx-auto px-4">
+        <SectionHeader
+            title="Get in Touch"
+            subtitle="We'd love to hear from you"
+            centered
+            class="mb-16"
+        />
+
+        <div
+            class="max-w-2xl mx-auto bg-white border-2 border-charcoal p-8 md:p-12 shadow-[8px_8px_0px_0px_#1A1A1A]"
+        >
+            <form class="space-y-6" action="#" method="POST">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <FormInput
+                        label="Name"
+                        name="name"
+                        required
+                        placeholder="John Doe"
+                    />
+                    <FormInput
+                        label="Email"
+                        name="email"
+                        type="email"
+                        required
+                        placeholder="john@example.com"
+                    />
+                </div>
+                <FormInput
+                    label="Phone"
+                    name="phone"
+                    type="tel"
+                    placeholder="0400 000 000"
+                />
+                <Textarea
+                    label="Message"
+                    name="message"
+                    required
+                    placeholder="Question about catering? Allergies?"
+                />
+
+                <Button type="submit" variant="primary" class="w-full">
+                    Send Message
+                </Button>
+            </form>
+        </div>
+    </div>
+
+    <HoursAndLocation />
+</BaseLayout>

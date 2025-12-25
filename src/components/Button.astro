@@ -1,0 +1,46 @@
+---
+interface Props {
+    variant?: "primary" | "secondary" | "outline" | "ghost";
+    size?: "sm" | "md" | "lg";
+    href?: string;
+    class?: string;
+    [key: string]: any;
+}
+
+const {
+    variant = "primary",
+    size = "md",
+    href,
+    class: className,
+    ...rest
+} = Astro.props;
+
+const baseStyles =
+    "inline-flex items-center justify-center gap-2 font-heading font-bold uppercase tracking-wider border-2 transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary disabled:opacity-50 disabled:pointer-events-none cursor-pointer";
+
+const variants = {
+    primary:
+        "bg-primary border-charcoal text-white hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#1A1A1A] active:translate-y-0 active:shadow-none",
+    secondary:
+        "bg-accent border-charcoal text-charcoal hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#1A1A1A] active:translate-y-0 active:shadow-none",
+    outline:
+        "bg-transparent border-charcoal text-charcoal hover:bg-charcoal hover:text-white hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#D92228] active:translate-y-0 active:shadow-none",
+    ghost: "bg-transparent border-transparent text-charcoal hover:bg-cream/50",
+};
+
+const sizes = {
+    sm: "text-xs px-4 py-2",
+    md: "text-sm px-6 py-3",
+    lg: "text-base px-8 py-4",
+};
+
+const Element = href ? "a" : "button";
+---
+
+<Element
+    href={href}
+    class:list={[baseStyles, variants[variant], sizes[size], className]}
+    {...rest}
+>
+    <slot />
+</Element>

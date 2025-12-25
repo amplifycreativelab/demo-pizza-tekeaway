@@ -1,0 +1,21 @@
+{
+  "name": "Takeaway Express",
+  "nameShort": "Express",
+  "description": "Perth's best street-style pizza. Hot, fresh, and ready in 20 minutes.",
+  "phone": "+61892221234",
+  "phoneDisplay": "(08) 9222 1234",
+  "email": "hello@takeawayexpress.com.au",
+  "address": {
+    "street": "123 William Street",
+    "suburb": "Northbridge",
+    "state": "WA",
+    "postcode": "6003",
+    "country": "AU"
+  },
+  "hours": "Daily: 11am - Late",
+  "social": {
+    "instagram": "https://instagram.com",
+    "facebook": "https://facebook.com"
+  },
+  "orderUrl": "https://ubereats.com"
+}

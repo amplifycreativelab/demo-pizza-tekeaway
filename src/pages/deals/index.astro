@@ -1,0 +1,113 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import deals from "../../data/deals.json";
+import Card from "../../components/Card.astro";
+import Badge from "../../components/Badge.astro";
+import Button from "../../components/Button.astro";
+import site from "../../data/site.json";
+import { Image } from "astro:assets";
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+    "/src/assets/images/**/*.{jpeg,jpg,png,gif,webp}",
+);
+---
+
+<BaseLayout
+    title="Deals & Specials | Best Pizza Deals Perth"
+    description="Best pizza deals in Northbridge. Family feasts, lunch specials, and more."
+>
+    <div
+        class="bg-accent text-charcoal py-16 md:py-24 text-center border-b-2 border-charcoal"
+    >
+        <h1
+            class="font-heading font-black text-5xl md:text-7xl uppercase tracking-tighter"
+        >
+            Hot Deals
+        </h1>
+        <p class="text-xl font-bold uppercase tracking-widest mt-4">
+            Limited Time Offers
+        </p>
+    </div>
+
+    <div class="container mx-auto px-4 py-20">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {
+                deals.map((deal) => {
+                    const imagePath = `/src/assets/images/${deal.image}`;
+                    return (
+                        <Card
+                            noPadding
+                            class="h-full flex flex-col relative hover:-translate-y-2 transition-transform duration-300"
+                        >
+                            <div class="bg-primary text-white text-center py-2 font-bold uppercase tracking-wider text-sm border-b-2 border-charcoal">
+                                {deal.expires}
+                            </div>
+                            <div class="relative h-64 border-b-2 border-charcoal bg-gray-200">
+                                {images[imagePath] ? (
+                                    <Image
+                                        src={images[imagePath]()}
+                                        alt={deal.title}
+                                        class="w-full h-full object-cover"
+                                        width={600}
+                                        height={400}
+                                    />
+                                ) : (
+                                    <div class="w-full h-full bg-gray-200 flex items-center justify-center text-gray-400">
+                                        No Image
+                                    </div>
+                                )}
+                                {deal.badge && (
+                                    <div class="absolute top-2 left-2">
+                                        <Badge
+                                            text={deal.badge}
+                                            variant="accent"
+                                            rotate
+                                        />
+                                    </div>
+                                )}
+                            </div>
+
+                            <div class="p-8 flex flex-col flex-grow text-center">
+                                <h2 class="font-heading font-black text-3xl uppercase mb-3">
+                                    {deal.title}
+                                </h2>
+                                <p class="text-charcoal/80 mb-6 flex-grow text-lg">
+                                    {deal.description}
+                                </p>
+
+                                <div class="flex justify-center items-center gap-4 mb-8 bg-cream p-4 border border-charcoal rounded transform -rotate-1 shadow-sm">
+                                    <div class="flex flex-col leading-none">
+                                        <span class="text-[10px] font-bold uppercase text-charcoal/50 mb-1">
+                                            Was
+                                        </span>
+                                        <span class="text-gray-400 line-through font-bold text-xl decoration-2">
+                                            ${deal.originalPrice}
+                                        </span>
+                                    </div>
+                                    <div class="w-[2px] h-8 bg-charcoal/10 mx-2" />
+                                    <div class="flex flex-col leading-none">
+                                        <span class="text-[10px] font-bold uppercase text-primary mb-1">
+                                            Now
+                                        </span>
+                                        <span class="font-heading font-black text-4xl text-primary leading-none shadow-none">
+                                            ${deal.price}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <Button
+                                    href={site.orderUrl}
+                                    variant="primary"
+                                    size="lg"
+                                    class="w-full"
+                                >
+                                    Claim This Deal
+                                </Button>
+                            </div>
+                        </Card>
+                    );
+                })
+            }
+        </div>
+    </div>
+</BaseLayout>

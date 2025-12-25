@@ -1,0 +1,121 @@
+---
+import site from "../data/site.json";
+
+const currentYear = new Date().getFullYear();
+const base = import.meta.env.BASE_URL === "/" ? "/" : import.meta.env.BASE_URL;
+const getPath = (path: string) =>
+    path.startsWith("/") ? `${base}${path.substring(1)}` : `${base}${path}`;
+
+const links = [
+    { text: "Menu", href: "menu" },
+    { text: "Deals", href: "deals" },
+    { text: "About", href: "about" },
+    { text: "Contact", href: "contact" },
+    { text: "Privacy", href: "privacy" },
+];
+---
+
+<footer
+    class="bg-charcoal text-cream border-t-2 border-white/10 pt-16 pb-32 md:pb-16"
+>
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 mb-12">
+            <!-- Brand -->
+            <div class="md:col-span-1">
+                <a
+                    href={base}
+                    class="text-2xl font-heading font-black tracking-tighter uppercase leading-none text-white block mb-4"
+                >
+                    Takeaway<span class="text-primary">Express</span>
+                </a>
+                <p class="text-white/80 text-sm max-w-xs">
+                    {site.description}
+                </p>
+            </div>
+
+            <!-- Links -->
+            <div>
+                <h3
+                    class="font-heading uppercase font-bold text-lg mb-4 text-primary"
+                >
+                    Explore
+                </h3>
+                <ul class="space-y-2">
+                    {
+                        links.map((link) => (
+                            <li>
+                                <a
+                                    href={getPath(link.href)}
+                                    class="text-white/80 hover:text-white transition-colors"
+                                >
+                                    {link.text}
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div>
+                <h3
+                    class="font-heading uppercase font-bold text-lg mb-4 text-primary"
+                >
+                    Contact
+                </h3>
+                <ul class="space-y-4 text-white/80 text-sm">
+                    <li class="flex items-start gap-3">
+                        <span class="font-bold text-white">A:</span>
+                        <span
+                            >{site.address.street}<br />{site.address.suburb}, {
+                                site.address.state
+                            }
+                            {site.address.postcode}</span
+                        >
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="font-bold text-white">T:</span>
+                        <a href={`tel:${site.phone}`} class="hover:text-white"
+                            >{site.phoneDisplay}</a
+                        >
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="font-bold text-white">E:</span>
+                        <a
+                            href={`mailto:${site.email}`}
+                            class="hover:text-white">{site.email}</a
+                        >
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Hours -->
+            <div>
+                <h3
+                    class="font-heading uppercase font-bold text-lg mb-4 text-primary"
+                >
+                    Open Hours
+                </h3>
+                <p class="text-white/80 text-sm">{site.hours}</p>
+                <div class="mt-4 p-4 border border-white/20 bg-white/5">
+                    <p
+                        class="text-xs text-white/60 mb-1 uppercase font-bold tracking-wider"
+                    >
+                        Pickup Instructions
+                    </p>
+                    <p class="text-xs">
+                        Parking available at rear off William St. Pickup counter
+                        just inside main entrance.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/40 text-center md:text-left"
+        >
+            <p>&copy; {currentYear} {site.name}. All rights reserved.</p>
+            <p class="font-heading uppercase">Street-Food Premium</p>
+        </div>
+    </div>
+</footer>

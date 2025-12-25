@@ -1,0 +1,135 @@
+[
+    {
+        "category": "Pizza",
+        "slug": "pizza",
+        "items": [
+            {
+                "id": "pepperoni-classic",
+                "name": "The Northbridge Pepperoni",
+                "price": 24,
+                "description": "Double pepperoni, mozzarella, and our signature spicy tomato base.",
+                "tags": [
+                    "Spicy",
+                    "Best Seller"
+                ],
+                "image": "pizzas/pepperoni.webp"
+            },
+            {
+                "id": "margherita-queen",
+                "name": "Margherita Queen",
+                "price": 20,
+                "description": "San Marzano tomato, buffalo mozzarella, fresh basil, extra virgin olive oil.",
+                "tags": [
+                    "Vegetarian"
+                ],
+                "image": "pizzas/margherita.webp"
+            },
+            {
+                "id": "bbq-chicken",
+                "name": "BBQ Chicken Blast",
+                "price": 25,
+                "description": "Roasted chicken, smoky BBQ sauce, red onions, mushrooms.",
+                "tags": [],
+                "image": "pizzas/bbq-chicken.webp"
+            },
+            {
+                "id": "veggie-supreme",
+                "name": "Veggie Supreme",
+                "price": 23,
+                "description": "Capsicum, mushrooms, olives, red onion, pineapple, mozzarella.",
+                "tags": [
+                    "Vegetarian"
+                ],
+                "image": "pizzas/veggie.webp"
+            },
+            {
+                "id": "meat-lovers",
+                "name": "Carnivore's Dream",
+                "price": 26,
+                "description": "Ham, pepperoni, chorizo, beef, bacon, BBQ sauce.",
+                "tags": [
+                    "Best Seller"
+                ],
+                "image": "pizzas/meat-lovers.webp"
+            },
+            {
+                "id": "spicy-prawn",
+                "name": "Highgate Heat",
+                "price": 28,
+                "description": "Marinated tiger prawns, chilli flakes, roasted capsicum, garlic oil.",
+                "tags": [
+                    "Spicy"
+                ],
+                "image": "pizzas/prawn.webp"
+            }
+        ]
+    },
+    {
+        "category": "Sides",
+        "slug": "sides",
+        "items": [
+            {
+                "id": "garlic-bread",
+                "name": "Cheesy Garlic Bread",
+                "price": 8,
+                "description": "Oven baked artisan bread with garlic butter and herbs.",
+                "tags": [],
+                "image": "sides/garlic-bread.webp"
+            },
+            {
+                "id": "wings",
+                "name": "Buffalo Wings (6pc)",
+                "price": 12,
+                "description": "Spicy buffalo wings served with ranch dip.",
+                "tags": [
+                    "Spicy"
+                ],
+                "image": "sides/wings.webp"
+            }
+        ]
+    },
+    {
+        "category": "Drinks",
+        "slug": "drinks",
+        "items": [
+            {
+                "id": "coke",
+                "name": "Coca Cola 1.25L",
+                "price": 6,
+                "description": "Classic Coke.",
+                "tags": [],
+                "image": "drinks/coke.webp"
+            },
+            {
+                "id": "lemonade",
+                "name": "Lemonade 1.25L",
+                "price": 6,
+                "description": "Refreshing lemonade.",
+                "tags": [],
+                "image": "drinks/lemonade.webp"
+            }
+        ]
+    },
+    {
+        "category": "Desserts",
+        "slug": "desserts",
+        "items": [
+            {
+                "id": "tiramisu",
+                "name": "Nonna's Tiramisu",
+                "price": 10,
+                "description": "Classic Italian dessert with coffee and mascarpone.",
+                "tags": [],
+                "image": "desserts/tiramisu.webp"
+            },
+            {
+                "id": "gelato",
+                "name": "Gelato Tub (500ml)",
+                "price": 14,
+                "description": "Choice of Chocolate, Vanilla, or Pistachio.",
+                "tags": [],
+                "image": "desserts/gelato.webp"
+            }
+        ]
+    }
+]

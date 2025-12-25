@@ -1,0 +1,51 @@
+---
+import site from "../data/site.json";
+const base =
+    import.meta.env.BASE_URL === "/"
+        ? ""
+        : import.meta.env.BASE_URL.replace(/\/$/, "");
+const image = `${base}/images/og-default.jpg`;
+
+const schema = {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    name: site.name,
+    image: image,
+    "@id": Astro.site?.toString(),
+    url: Astro.site?.toString(),
+    telephone: site.phone,
+    menu: `${Astro.site?.toString()}menu`,
+    servesCuisine: "Pizza",
+    address: {
+        "@type": "PostalAddress",
+        streetAddress: site.address.street,
+        addressLocality: site.address.suburb,
+        addressRegion: site.address.state,
+        postalCode: site.address.postcode,
+        addressCountry: site.address.country,
+    },
+    geo: {
+        "@type": "GeoCoordinates",
+        latitude: -31.947,
+        longitude: 115.857,
+    },
+    openingHoursSpecification: {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+        ],
+        opens: "11:00",
+        closes: "23:00",
+    },
+    sameAs: Object.values(site.social || {}),
+    priceRange: "$$",
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

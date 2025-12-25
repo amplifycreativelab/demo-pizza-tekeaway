@@ -1,0 +1,95 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import Button from "../components/Button.astro";
+---
+
+<BaseLayout title="Catering & Services | Party Pizza Perth">
+    <div class="py-20 md:py-24 container mx-auto px-4">
+        <SectionHeader
+            title="Catering & Events"
+            subtitle="Pizza Party?"
+            centered
+            class="mb-16"
+        />
+
+        <div
+            class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto"
+        >
+            <div>
+                <h3 class="font-heading font-black text-3xl uppercase mb-4">
+                    Feed the Crowd
+                </h3>
+                <p class="text-charcoal/80 text-lg mb-6 leading-relaxed">
+                    Hosting a party, office lunch, or late-night event? We bring
+                    the heat. <br />
+                    Our large orders are delivered fresh and on time.
+                </p>
+                <ul class="space-y-4 mb-8">
+                    <li class="flex items-center gap-3">
+                        <div
+                            class="w-8 h-8 bg-primary text-white flex items-center justify-center font-bold text-sm border border-charcoal"
+                        >
+                            ✓
+                        </div>
+                        <span class="font-bold uppercase tracking-wide"
+                            >Corporate Events</span
+                        >
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <div
+                            class="w-8 h-8 bg-primary text-white flex items-center justify-center font-bold text-sm border border-charcoal"
+                        >
+                            ✓
+                        </div>
+                        <span class="font-bold uppercase tracking-wide"
+                            >Birthday Parties</span
+                        >
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <div
+                            class="w-8 h-8 bg-primary text-white flex items-center justify-center font-bold text-sm border border-charcoal"
+                        >
+                            ✓
+                        </div>
+                        <span class="font-bold uppercase tracking-wide"
+                            >Wedding Late Night Snacks</span
+                        >
+                    </li>
+                </ul>
+                <Button href="contact" variant="primary">Enquire Now</Button>
+            </div>
+
+            <div
+                class="bg-charcoal p-8 md:p-12 text-center text-white border-2 border-charcoal shadow-[8px_8px_0px_0px_#D92228] transform md:rotate-1 hover:rotate-0 transition-transform duration-300"
+            >
+                <h3 class="font-heading font-black text-3xl uppercase mb-2">
+                    Group Specialist
+                </h3>
+                <p class="font-bold text-accent uppercase tracking-widest mb-6">
+                    Pre-Order Deal
+                </p>
+                <p class="text-6xl font-heading font-black mb-2 text-white">
+                    15%
+                </p>
+                <p
+                    class="text-2xl font-heading uppercase font-bold text-primary mb-8"
+                >
+                    OFF Orders > $200
+                </p>
+                <p class="mb-8 text-white/70">
+                    Use code: <span
+                        class="text-white font-bold bg-white/10 px-2 py-1"
+                        >PARTY15</span
+                    > when calling.
+                </p>
+                <Button
+                    href="menu"
+                    variant="outline"
+                    class="text-white border-white hover:bg-white hover:text-charcoal bg-transparent w-full"
+                    >View Menu</Button
+                >
+            </div>
+        </div>
+    </div>
+</BaseLayout>

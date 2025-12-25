@@ -1,0 +1,35 @@
+---
+interface Props {
+    title: string;
+    subtitle?: string;
+    centered?: boolean;
+    class?: string;
+    light?: boolean; // For dark backgrounds
+}
+const {
+    title,
+    subtitle,
+    centered = false,
+    class: className,
+    light = false,
+} = Astro.props;
+---
+
+<div class:list={["mb-12", centered && "text-center", className]}>
+    {
+        subtitle && (
+            <p class="text-primary font-bold uppercase tracking-widest text-sm mb-3">
+                {subtitle}
+            </p>
+        )
+    }
+    <h2
+        class:list={[
+            "text-3xl md:text-5xl font-heading font-black uppercase leading-none",
+            light ? "text-white" : "text-charcoal",
+        ]}
+    >
+        {title}
+    </h2>
+    <slot />
+</div>

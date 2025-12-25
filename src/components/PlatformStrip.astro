@@ -1,0 +1,45 @@
+---
+const platforms = ["UberEats", "DoorDash", "Menulog"];
+---
+
+<div
+    class="bg-charcoal py-8 border-y-2 border-charcoal overflow-hidden select-none max-w-full"
+>
+    <div
+        class="flex gap-12 md:gap-24 animate-marquee whitespace-nowrap min-w-full"
+    >
+        {/* Repeats to fill space and loop */}
+        {
+            [
+                ...platforms,
+                ...platforms,
+                ...platforms,
+                ...platforms,
+                ...platforms,
+            ].map((name) => (
+                <span class="text-3xl md:text-5xl font-heading font-black uppercase text-transparent stroke-text opacity-30">
+                    {name}
+                </span>
+            ))
+        }
+    </div>
+</div>
+
+<style>
+    .stroke-text {
+        -webkit-text-stroke: 1px rgba(255, 255, 255, 1);
+    }
+
+    .animate-marquee {
+        animation: marquee 20s linear infinite;
+    }
+
+    @keyframes marquee {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+</style>
