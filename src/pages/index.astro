@@ -7,6 +7,8 @@ import BestSellersGrid from "../components/BestSellersGrid.astro";
 import ReviewCard from "../components/ReviewCard.astro";
 import HoursAndLocation from "../components/HoursAndLocation.astro";
 import site from "../data/site.json";
+import { Image } from "astro:assets";
+import heroImage from "../assets/images/hero-main.webp";
 
 const reviews = [
 	{
@@ -35,6 +37,14 @@ const reviews = [
 	<section
 		class="relative bg-cream pt-20 pb-32 md:py-32 overflow-hidden border-b-2 border-charcoal"
 	>
+		<div class="absolute inset-0 z-0">
+			<Image
+				src={heroImage}
+				alt="Fresh pizza background"
+				class="w-full h-full object-cover opacity-[0.55] grayscale-[10%]"
+				loading="eager"
+			/>
+		</div>
 		<div class="container mx-auto px-4 relative z-10 text-center">
 			<h1
 				class="font-heading font-black text-5xl md:text-7xl lg:text-9xl uppercase leading-[0.85] text-charcoal mb-8 max-w-5xl mx-auto tracking-tighter"
@@ -71,16 +81,6 @@ const reviews = [
 					Call {site.phoneDisplay}
 				</Button>
 			</div>
-		</div>
-
-		<!-- Decorative Elements -->
-		<div
-			class="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/2 w-96 h-96 bg-accent/10 rounded-full blur-3xl -z-10"
-		>
-		</div>
-		<div
-			class="absolute bottom-0 right-0 translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl -z-10"
-		>
 		</div>
 	</section>
 
