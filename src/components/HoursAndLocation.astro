@@ -2,6 +2,10 @@
 import site from "../data/site.json";
 import SectionHeader from "./SectionHeader.astro";
 import Button from "./Button.astro";
+
+const base = import.meta.env.BASE_URL.endsWith("/")
+    ? import.meta.env.BASE_URL
+    : `${import.meta.env.BASE_URL}/`;
 ---
 
 <section class="py-24 bg-charcoal text-cream relative overflow-hidden">
@@ -12,8 +16,8 @@ import Button from "./Button.astro";
     >
         <div>
             <SectionHeader
-                title="Find Us"
-                subtitle="Visit the Shop"
+                title="Details"
+                subtitle="Hours & Info"
                 light
                 class="mb-8"
             />
@@ -23,15 +27,14 @@ import Button from "./Button.astro";
                     <h3
                         class="font-heading text-xl md:text-2xl text-primary mb-2"
                     >
-                        Location
+                        Concept location
                     </h3>
                     <p class="text-lg leading-relaxed text-white/90">
                         {site.address.street}<br />
-                        {site.address.suburb}, {site.address.state}
-                        {site.address.postcode}
+                        {site.address.suburb}
                     </p>
                     <p class="mt-2 text-white/50 text-sm">
-                        Parking available at rear.
+                        Fictional details for a portfolio demo.
                     </p>
                 </div>
 
@@ -47,19 +50,19 @@ import Button from "./Button.astro";
 
                 <div class="flex flex-col sm:flex-row gap-4 pt-6">
                     <Button
-                        href={`tel:${site.phone}`}
+                        href={`${base}contact`}
                         variant="secondary"
                         class="bg-white text-charcoal border-white hover:bg-cream hover:text-charcoal hover:border-cream"
                     >
-                        Call Shop
+                        Contact
                     </Button>
                     <Button
-                        href="https://maps.google.com"
+                        href={site.orderUrl}
                         target="_blank"
                         variant="outline"
                         class="text-white border-white hover:bg-white hover:text-charcoal"
                     >
-                        Get Directions
+                        Order Online
                     </Button>
                 </div>
             </div>
@@ -75,11 +78,10 @@ import Button from "./Button.astro";
             >
                 Map View
             </div>
-            <!-- In a real app, embed Google Maps iframe here -->
             <div
                 class="absolute bottom-4 right-4 bg-primary text-white px-4 py-2 font-bold uppercase text-xs tracking-wider shadow-lg border border-charcoal"
             >
-                Northbridge
+                {site.address.suburb}
             </div>
         </div>
     </div>

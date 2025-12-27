@@ -5,7 +5,7 @@
         "items": [
             {
                 "id": "pepperoni-classic",
-                "name": "The Northbridge Pepperoni",
+                "name": "The District Pepperoni",
                 "price": 24,
                 "description": "Double pepperoni, mozzarella, and our signature spicy tomato base.",
                 "tags": [
@@ -54,7 +54,7 @@
             },
             {
                 "id": "spicy-prawn",
-                "name": "Highgate Heat",
+                "name": "Market Heat",
                 "price": 28,
                 "description": "Marinated tiger prawns, chilli flakes, roasted capsicum, garlic oil.",
                 "tags": [

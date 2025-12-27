@@ -2,6 +2,7 @@
 import site from "../data/site.json";
 
 const currentYear = new Date().getFullYear();
+const mainSiteUrl = "https://amplifycreativelab.com";
 const base = import.meta.env.BASE_URL === "/" ? "/" : import.meta.env.BASE_URL;
 const getPath = (path: string) =>
     path.startsWith("/") ? `${base}${path.substring(1)}` : `${base}${path}`;
@@ -63,30 +64,16 @@ const links = [
                 >
                     Contact
                 </h3>
-                <ul class="space-y-4 text-white/80 text-sm">
-                    <li class="flex items-start gap-3">
-                        <span class="font-bold text-white">A:</span>
-                        <span
-                            >{site.address.street}<br />{site.address.suburb}, {
-                                site.address.state
-                            }
-                            {site.address.postcode}</span
-                        >
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <span class="font-bold text-white">T:</span>
-                        <a href={`tel:${site.phone}`} class="hover:text-white"
-                            >{site.phoneDisplay}</a
-                        >
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <span class="font-bold text-white">E:</span>
-                        <a
-                            href={`mailto:${site.email}`}
-                            class="hover:text-white">{site.email}</a
-                        >
-                    </li>
-                </ul>
+                <p class="text-white/80 text-sm leading-relaxed max-w-xs">
+                    Non-indexed concept demo. For real enquiries, visit{" "}
+                    <a
+                        href={mainSiteUrl}
+                        target="_blank"
+                        rel="nofollow noopener noreferrer"
+                        class="underline underline-offset-4 hover:text-white"
+                        >amplifycreativelab.com</a
+                    >.
+                </p>
             </div>
 
             <!-- Hours -->
@@ -104,8 +91,8 @@ const links = [
                         Pickup Instructions
                     </p>
                     <p class="text-xs">
-                        Parking available at rear off William St. Pickup counter
-                        just inside main entrance.
+                        Parking available nearby. Pickup counter just inside the
+                        main entrance.
                     </p>
                 </div>
             </div>
